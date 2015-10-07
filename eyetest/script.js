@@ -12,14 +12,15 @@ function gameStart()
 	var gridsize = parseInt($("#gridsize").val()) || 6 // x*x
 	var field = $(".game")
 	var levels = parseInt($("#levels").val()) || 10
+	var difficultyChange = parseInt($("#difficultyChange").val()) || 5
 	var difficulty = 100 - (parseInt($("#difficulty").val()) || 80)//The smaller the number, the harder it is. Anything < 10 is near impossible imho.
 	console.log(difficulty)
-	fieldGenerate(gridsize, field, difficulty, levels)		
+	fieldGenerate(gridsize, field, difficulty, difficultyChange, levels)		
 }
 function gameOver(victory)
 {
 	victory = typeof victory !== 'undefined' ? victory : false;
-	
+
 	//Game over message	
 	$(".game").html("")
 	if(!victory) {
@@ -29,7 +30,7 @@ function gameOver(victory)
 	}
 	startButtonCreate("Try again?")
 }
-function fieldGenerate(size, field, difficulty, levels) 
+function fieldGenerate(size, field, difficulty, difficultyChange, levels) 
 {
 	field.html("")
 
@@ -44,7 +45,7 @@ function fieldGenerate(size, field, difficulty, levels)
 	console.log("Debug: ["+ parseInt(randomX+1) + ":" + parseInt(randomY+1) + "]")
 
 	// Calculate the difficulty the next round will have. Feel free to adjust this to your needs.
-	var newDifficulty = (levels-1)%difficulty == 0 ? difficulty - 5 : difficulty
+	var newDifficulty = (levels-1)%difficulty == 0 ? Math.min(difficulty - difficultyChange, 0) : difficulty
 
 	//col
 	for (var i = 0; i < size; i++) {
