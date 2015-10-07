@@ -16,8 +16,10 @@ function gameStart()
 	console.log(difficulty)
 	fieldGenerate(gridsize, field, difficulty, levels)		
 }
-function gameOver(victory = false)
+function gameOver(victory)
 {
+	victory = typeof victory !== 'undefined' ? victory : false;
+	
 	//Game over message	
 	$(".game").html("")
 	if(!victory) {
