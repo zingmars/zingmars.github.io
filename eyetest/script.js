@@ -13,8 +13,7 @@ function gameStart()
 	var field = $(".game")
 	var levels = parseInt($("#levels").val()) || 10
 	var difficultyChange = parseInt($("#difficultyChange").val()) || 5
-	var difficulty = 100 - (parseInt($("#difficulty").val()) || 80)//The smaller the number, the harder it is. Anything < 10 is near impossible imho.
-	console.log(difficulty)
+	var difficulty = 100 - (parseInt($("#difficulty").val()) || 80)//The smaller the number, the harder it is. Anything < 10 is near impossible imho.	
 	fieldGenerate(gridsize, field, difficulty, difficultyChange, levels)		
 }
 function gameOver(victory)
@@ -82,11 +81,11 @@ function fieldGenerate(size, field, difficulty, difficultyChange, levels)
 
 			//Add click handlers
 			if(i == randomY && j == randomX) {
-				$(".color-box:last").on("click", function () {					
-					if(levels == 1) { 
+				$(".color-box:last").on("click", function () {										
+					if(levels == 1) { 						
 						gameOver(true)										
 					} else {						
-						fieldGenerate(size, field, newDifficulty, levels - 1)																	
+						fieldGenerate(size, field, newDifficulty, difficultyChange, levels-1)																	
 					}
 				})
 			} else {
